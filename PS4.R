@@ -4,6 +4,8 @@ wikiURL <- 'https://en.wikipedia.org/wiki/List_of_United_States_presidential_ele
 ## Grab the tables from the page and use the html_table function to extract the tables.
 ## You need to subset temp to find the data you're interested in (HINT: html_table())
 
+library(htmltab)
+
 temp <- wikiURL %>% 
   read_html %>%
   html_nodes("table")
@@ -46,28 +48,27 @@ plot(NULL, NULL,
      xlab = "Year", 
      ylab = "Turnout in Percent", 
      pch = 20,
-     main = "Turnout in Percent by Year",
+     main = "Presidential Turnout in Percent by Year",
      xlim = c(1800,2020),
      ylim = c(20, 90))
 points(dem_years, dem_turnout, pch = 20, col = 'blue')
 points(rep_years, rep_turnout, pch = 20, col = 'red')
-points(independent_years, independent_turnout, pch = 20, col = "green")
+points(independent_years, independent_turnout, pch = 20, col = "black")
 par(bg = 'white')
 legend(x = 1962, y = 90,
        legend = c("Democrats", "Republicans", "Other"),
        pch = 20,
-       col = c('blue', 'red', 'green'),
+       col = c('blue', 'red', 'black'),
        bg = 'grey',
-       cex = .7,
+       cex = .6,
        title = "Legend",
        pt.cex = 1)
 abline(a = turnout_coefficients[1], b = turnout_coefficients[2], lty = 2)
-legend(x = 1900, y = 40,
+legend(x = 1920, y = 40,
        legend = "Turnout = 250 - .0976 * Year",
-       cex = .7)
+       cex = 1.1,
+       box.lwd = 0)
 
-       
-?legend
 
 dem_pop_vote_percent<-dem_data$Popular.vote....
 dem_pop_vote_percent<-as.numeric(sub("%", "", dem_pop_vote_percent))
@@ -81,7 +82,7 @@ independent_vote_percent<-as.numeric(sub("%", "", independent_vote_percent))
 plot(NULL, NULL,
      xlab = "Year",
      ylab = "Winning Vote Percentage",
-     main = "Winning Vote Percentage by Year",
+     main = "Winning Presidential Vote Percentage by Year",
      ylim = c(20,70),
      xlim = c(1820, 2020))
 points(dem_years, dem_pop_vote_percent,
@@ -92,17 +93,20 @@ points(rep_years, rep_pop_vote_percent,
        col = 'red')
 points(independent_years, independent_vote_percent,
        pch = 20,
-       col = 'yellow')
-par(bg = 'grey')
-
-
-
-plot(dem_years, dem_pop_vote_percent,
-     main = "Winning Percent",
-     pch = 20,
-     col = 'blue')
+       col = 'black')
 par(bg = 'white')
-
-dem_data$Popular.vote
-
+legend(x = 1968, y = 40,
+       legend = c("Democrats", "Republicans", "Other"),
+       pch = 20,
+       col = c('blue', 'red', 'black'),
+       bg = 'grey',
+       cex = .6,
+       title = "Legend",
+       pt.cex = 1)
+abline(a = 50, b = 0,
+       lty = 3)
+legend(x = 1820, y = 25,
+       legend = "Line represents 50% threshhold, not a regression line",
+       cex = 1,
+       box.lwd = 0)
 
