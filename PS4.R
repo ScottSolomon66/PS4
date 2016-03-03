@@ -60,7 +60,7 @@ plot(NULL, NULL, #setting up a blank plot
      #defining point type
      pch = 20,
      #creating a title
-     main = "Presidential Turnout in Percent by Year",
+     main = "Presidential Election Turnout in Percent by Year",
      #setting the axis scales
      xlim = c(1800,2020),
      ylim = c(20, 90))
